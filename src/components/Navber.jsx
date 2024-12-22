@@ -8,8 +8,16 @@ const Navber = () => {
   const links = (
     <>
       <li>
-        {" "}
-        <NavLink to="/">Home</NavLink>{" "}
+        <NavLink to="/">Home</NavLink>
+      </li>
+      <li>
+        <NavLink to="/">All Books</NavLink>
+      </li>
+      <li>
+        <NavLink to="/">Add Book</NavLink>
+      </li>
+      <li>
+        <NavLink to="/">Borrowed Books</NavLink>
       </li>
     </>
   );
