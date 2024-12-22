@@ -11,13 +11,13 @@ const Navber = () => {
         <NavLink to="/">Home</NavLink>
       </li>
       <li>
-        <NavLink to="/">All Books</NavLink>
+        <NavLink to="/allBoks">All Books</NavLink>
       </li>
       <li>
-        <NavLink to="/">Add Book</NavLink>
+        <NavLink to="/addBook">Add Book</NavLink>
       </li>
       <li>
-        <NavLink to="/">Borrowed Books</NavLink>
+        <NavLink to="/borrowedBooks">Borrowed Books</NavLink>
       </li>
     </>
   );
