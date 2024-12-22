@@ -40,6 +40,7 @@ const Login = () => {
             position: "top-center",
           });
  
+        // eslint-disable-next-line no-unused-vars
         } catch (error) {
           toast.error("An error occurred while Logged in with Google ");
         }
