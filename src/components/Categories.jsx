@@ -37,7 +37,7 @@ const Categories = () => {
           {categories.map((category, index) => (
             <div
               key={index}
-              className="card   bg-gradient-to-br from-purple-200/60 via-white/30 to-purple-400/60 shadow-xl hover:shadow-2xl transition-shadow"
+              className="card rounded-xl   bg-gradient-to-br from-purple-200/60 via-white/30 to-purple-400/40 shadow-xl hover:shadow-2xl transition-shadow"
             >
               <figure>
                 <img
