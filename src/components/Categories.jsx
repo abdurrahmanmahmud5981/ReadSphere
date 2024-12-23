@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import categor1 from "../assets/categories/category_1.jpeg";
 import categor2 from "../assets/categories/category_2.jpeg";
 import categor3 from "../assets/categories/category_3.jpeg";
@@ -16,7 +17,7 @@ const Categories = () => {
       description: "Discover real-world knowledge",
     },
     {
-      title: "Academic",
+      title: "Philosophical",
       image: categor3,
       description: "Support your studies",
     },
@@ -50,7 +51,8 @@ const Categories = () => {
                 <h3 className="card-title">{category.title}</h3>
                 <p>{category.description}</p>
                 <div className="card-actions justify-end">
-                  <button className="btn btn-neutral">Explore</button>
+                  <Link to={`/categories/${category.title}`}>
+                  <button className="btn btn-neutral">Explore</button></Link>
                 </div>
               </div>
             </div>
