@@ -1,5 +1,6 @@
 import { Outlet } from "react-router-dom";
 import Navber from "../components/Navber";
+import Footer from "../components/Footer";
 
 const MainLayout = () => {
   return (
@@ -11,9 +12,7 @@ const MainLayout = () => {
         <Outlet />
       </main>
       <footer>
-        <div className="bg-base-100 dark:bg-base-900 p-5 text-center ">
-          <p>© 2021 ReadSphere</p>
-        </div>
+       <Footer/>
       </footer>
     </div>
   );
