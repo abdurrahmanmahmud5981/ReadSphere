@@ -1,86 +1,50 @@
-import React from "react";
+
+import { FaAccessibleIcon, FaRocket, FaLock } from "react-icons/fa";
 
 const Features = () => {
+    const features = [
+        {
+          title: "Easy Access",
+          description: "Browse and borrow books with just a few clicks.",
+          icon: <FaAccessibleIcon className="text-white text-4xl" />,
+        },
+        {
+          title: "Quick Service",
+          description: "Fast processing of borrowing requests.",
+          icon: <FaRocket className="text-white text-4xl" />,
+        },
+        {
+          title: "Secure System",
+          description: "Safe and secure book management.",
+          icon: <FaLock className="text-white text-4xl" />,
+        },
+      ]
   return (
-    <div>
-      <section className="py-16">
-        <div className=" mx-auto ">
-          <h2 className="text-3xl font-bold text-center mb-12">
-            Why Choose Us
-          </h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="card bg-gradient-to-br from-purple-200/60 via-white/30 to-purple-400/40 bg-base-100 shadow-xl">
-              <div className="card-body items-center text-center">
-                <div className="rounded-full bg-primary p-4 mb-4">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="h-8 w-8 text-white"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M12 6v6m0 0v6m0-6h6m-6 0H6"
-                    />
-                  </svg>
+    <section className="py-16">
+      <div className="">
+        <h2 className="text-3xl font-extrabold text-center text-gray-800 mb-12">
+          Why Choose Us
+        </h2>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          {features?.map((item, index) => (
+            <div
+              key={index}
+              className="card   bg-gradient-to-br from-purple-200/60 via-white/20 to-purple-400/40 shadow-lg hover:shadow-2xl transition duration-300 rounded-xl"
+            >
+              <div className="card-body items-center text-center space-y-4">
+                <div className="rounded-full bg-primary p-5 shadow-lg">
+                  {item.icon}
                 </div>
-                <h3 className="card-title">Easy Access</h3>
-                <p>Browse and borrow books with just a few clicks</p>
+                <h3 className="card-title text-xl font-bold text-gray-700">
+                  {item.title}
+                </h3>
+                <p className="text-gray-600">{item.description}</p>
               </div>
             </div>
-
-            <div className="card bg-gradient-to-br from-purple-200/60 via-white/30 to-purple-400/40 bg-base-100 shadow-xl">
-              <div className="card-body items-center text-center">
-                <div className="rounded-full bg-primary p-4 mb-4">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="h-8 w-8 text-white"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M13 10V3L4 14h7v7l9-11h-7z"
-                    />
-                  </svg>
-                </div>
-                <h3 className="card-title">Quick Service</h3>
-                <p>Fast processing of borrowing requests</p>
-              </div>
-            </div>
-
-            <div className="card bg-gradient-to-br from-purple-200/60 via-white/30 to-purple-400/40 bg-base-100 shadow-xl">
-              <div className="card-body items-center text-center">
-                <div className="rounded-full bg-primary p-4 mb-4">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="h-8 w-8 text-white"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"
-                    />
-                  </svg>
-                </div>
-                <h3 className="card-title">Secure System</h3>
-                <p>Safe and secure book management</p>
-              </div>
-            </div>
-          </div>
+          ))}
         </div>
-      </section>
-    </div>
+      </div>
+    </section>
   );
 };
 
