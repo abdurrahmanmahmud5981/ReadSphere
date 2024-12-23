@@ -1,6 +1,7 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import "./index.css";
+import '@smastrom/react-rating/style.css'
 import { RouterProvider } from "react-router-dom";
 import routes from "./routes/routes";
 import AuthProvider from "./provider/AuthProvider";

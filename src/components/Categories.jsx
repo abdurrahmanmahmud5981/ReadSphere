@@ -50,9 +50,9 @@ const Categories = () => {
               <div className="card-body p-4">
                 <h3 className="card-title">{category.title}</h3>
                 <p>{category.description}</p>
-                <div className="card-actions justify-end">
-                  <Link to={`/categories/${category.title}`}>
-                  <button className="btn btn-neutral">Explore</button></Link>
+                <div className="card-actions mt-2 ">
+                  <Link className="w-full" to={`/categories/${category.title}`}>
+                  <button className="btn btn-neutral w-full rounded-full ">Explore</button></Link>
                 </div>
               </div>
             </div>
