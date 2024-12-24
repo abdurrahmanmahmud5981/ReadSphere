@@ -59,7 +59,7 @@ const SingleBook = ({ book }) => {
         {/* Action Buttons */}
         <div className="card-actions  mt-4">
           <Link
-            to={`/book/${_id}`}
+            to={`/bookDetails/${_id}`}
             className="py-3 px-6 text-center w-full border rounded-full font-semibold hover:bg-primary hover:text-white transition-colors duration-300"
           >
             Details

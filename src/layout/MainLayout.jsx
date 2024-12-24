@@ -12,6 +12,7 @@ const MainLayout = () => {
         <Outlet />
       </main>
       <footer>
+        
        <Footer/>
       </footer>
     </div>
