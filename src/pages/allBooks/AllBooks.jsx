@@ -15,7 +15,6 @@ const AllBooks = () => {
     const fetchCategory = async () => {
       try {
         const { data } = await axiosSecure.get(`/books`);
-        console.log(data);
         setBooks(data);
       } catch (error) {
         console.log(error);
@@ -48,11 +47,11 @@ const AllBooks = () => {
 
   return (
     <>
-    <Helmet>
-      <title>All Books - ReadSphere</title>
-      <meta name="description" content="All books in the ReadSphere." />
-      <meta property="og:title" content="All Books - ReadSphere" />
-    </Helmet>
+      <Helmet>
+        <title>All Books - ReadSphere</title>
+        <meta name="description" content="All books in the ReadSphere." />
+        <meta property="og:title" content="All Books - ReadSphere" />
+      </Helmet>
       <div className=" mx-auto  py-8">
         <motion.div
           initial={{ y: -10, opacity: 0 }}

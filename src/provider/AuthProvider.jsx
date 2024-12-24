@@ -13,6 +13,7 @@ import {
 } from "firebase/auth";
 import auth from "../firebase/firebase.config";
 import LoadingSpinner from "../components/LoadingSpinner";
+import { axiosSecure } from "../hooks/useAxiosSecure";
 
 // eslint-disable-next-line react/prop-types
 const AuthProvider = ({ children }) => {
@@ -47,10 +48,25 @@ const AuthProvider = ({ children }) => {
   };
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+    const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
       setUser(currentUser);
-     
       setLoader(false);
+      if (currentUser?.email) {
+        console.log("User Logged In");
+        const { data } = await axiosSecure.post(
+          `${import.meta.env.VITE_API_URL}/jwt`,
+          {
+            email: currentUser?.email,
+          }
+        );
+        console.log('kjdshfkjadhfakdsa',data);
+      } else {
+        console.log("User Logged Out");
+        const { data } = await axiosSecure.get(
+          `${import.meta.env.VITE_API_URL}/logout`
+        );
+        console.log(data);
+      }
       return () => {
         unsubscribe();
       };
@@ -71,7 +87,7 @@ const AuthProvider = ({ children }) => {
   };
 
   if (loader) {
-    return <LoadingSpinner/>
+    return <LoadingSpinner />;
   }
   return (
     <AuthContext.Provider value={userInformation}>
