@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import useAuth from "../../hooks/useAuth";
 import { axiosSecure } from "../../hooks/useAxiosSecure";
 import { motion } from "framer-motion";
+import Swal from "sweetalert2";
 const BorrowedBooks = () => {
   const { user } = useAuth();
   const [borrowedBooks, setBorrowedBooks] = useState([]);
@@ -19,21 +20,50 @@ const BorrowedBooks = () => {
     fetchBorrowedBooks();
   }, [user]);
 
-
   // handle return book
-  const handleReturnBook = async (id,bookId) => {
+  const handleReturnBook = async (id, bookId) => {
     try {
-      console.log(bookId);
-      console.log(id);
-      await axiosSecure.delete(`/borrowed-books/${id}?bookId=${bookId}`);
-      setBorrowedBooks((prevBooks) =>
-        prevBooks.filter((book) => book._id !== id)
-      );
+      const result = await Swal.fire({
+        title: "Are you sure?",
+        text: "Do you want to return this book?",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, return it!",
+      });
+
+      if (result.isConfirmed) {
+        try {
+          await axiosSecure.delete(`/borrowed-books/${id}?bookId=${bookId}`);
+
+          setBorrowedBooks((prevBooks) =>
+            prevBooks.filter((book) => book._id !== id)
+          );
+
+          await Swal.fire({
+            title: "Returned!",
+            text: "The book has been returned successfully.",
+            icon: "success",
+          });
+        } catch (error) {
+          console.error("Error returning book:", error);
+          Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: "Failed to return the book!",
+          });
+        }
+      }
     } catch (error) {
-      console.log(error);
+      console.error("Error in return process:", error);
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Something went wrong!",
+      });
     }
   };
-
   return (
     <>
       <h1 className="text-3xl font-bold text-center mb-8">My Borrowed Books</h1>
@@ -106,7 +136,12 @@ const BorrowedBooks = () => {
                 </h3>
                 {/* Action Buttons */}
                 <div className="card-actions  mt-4">
-                  <button onClick={()=> handleReturnBook(book?._id, book?.bookId)} className="btn btn-neutral">Return Book</button>
+                  <button
+                    onClick={() => handleReturnBook(book?._id, book?.bookId)}
+                    className="btn btn-neutral"
+                  >
+                    Return Book
+                  </button>
                 </div>
               </div>
             </motion.div>
