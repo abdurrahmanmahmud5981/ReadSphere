@@ -85,7 +85,7 @@ const BookDetails = () => {
   return (
     <>
     <Helmet>
-      <title>{book?.bookName} - ReadSphere</title>
+      <title>{`${book?.bookName}`}- ReadSphere</title>
       <meta
         name="description"
         content={`Check out ${book?.bookName} by ${book?.authorName} on ReadSphere.`}

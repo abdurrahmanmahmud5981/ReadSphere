@@ -69,32 +69,14 @@ const Navber = () => {
         </div>
         <div className="navbar-end">
           {user ? (
-            // <div className="flex items-center gap-2">
-            //   {user?.photoURL && (
-            //     <img
-            //       src={user?.photoURL}
-            //       alt="User"
-            //       className="w-10 h-10 rounded-full cursor-pointer"
-            //       title={user?.displayName}
-            //     />
-            //   )}
-            //   <button
-            //     onClick={() => {
-            //       logOut();
-            //       return toast.success("You have been logged out successfully");
-            //     }}
-            //     className="btn btn-neutral min-h-full h-full py-3"
-            //   >
-            //     Logout
-            //   </button>
-            // </div>
-            <div className="dropdown dropdown-hover dropdown-end z-50">
+            
+            <div className="dropdown dropdown-hover dropdown-end z-50 ring ring-primary rounded-full">
               <div tabIndex={0} role="button" className="">
                 {user?.photoURL && (
                   <img
                     src={user?.photoURL}
                     alt="User"
-                    className="w-10 h-10 rounded-full cursor-pointer"
+                    className="w-10 h-10 rounded-full cursor-pointer "
                   />
                 )}
               </div>
