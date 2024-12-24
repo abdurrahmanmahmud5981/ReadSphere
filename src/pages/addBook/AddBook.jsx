@@ -5,8 +5,11 @@ import axios from "axios";
 import toast from "react-hot-toast";
 
 import { axiosSecure } from "../../hooks/useAxiosSecure";
+import useAuth from "../../hooks/useAuth";
 
 const AddBook = () => {
+  const {user} = useAuth()
+  console.log(user);
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
@@ -37,13 +40,13 @@ const AddBook = () => {
         quantity: parseInt(data.quantity),
         bookRating: parseFloat(data.rating),
         pages: parseInt(data.pages),
-        publisher: "J. B. Lippincott & Co.",
-        publisherEmail: '',
+        publisher: user?.displayName,
+        publisherEmail: user?.email ,
         bookContent: data.aboutBook,
         
         shortDescription: data.description,
       };
-      
+      console.log(formData);
       toast.success("Book added successfully!");
       // reset();
 
