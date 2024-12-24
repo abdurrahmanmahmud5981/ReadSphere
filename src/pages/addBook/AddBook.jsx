@@ -17,15 +17,36 @@ const AddBook = () => {
     reset,
   } = useForm();
 
-  const categories = ["Ficton", "Non-Fiction", "Philosophical", "Children's Books"];
+  const categories = [
+    "Ficton",
+    "Non-Fiction",
+    "Philosophical",
+    "Children's Books",
+  ];
   const onSubmit = async (data) => {
     try {
       setLoading(true);
       console.log(data);
 
-      toast.success("Book added successfully!");
-      reset();
+      // Add book to database
+      const formData = {
+        imageUrl: data.image,
+        bookName: data.name,
+        authorName: data.author,
+        bookCategory: data.category,
+        quantity: parseInt(data.quantity),
+        bookRating: parseFloat(data.rating),
+        pages: parseInt(data.pages),
+        publisher: "J. B. Lippincott & Co.",
+        publisherEmail: '',
+        bookContent: data.aboutBook,
+        
+        shortDescription: data.description,
+      };
       
+      toast.success("Book added successfully!");
+      // reset();
+
       // navigate("/all-books");
     } catch (error) {
       console.error("Error adding book:", error);
@@ -49,25 +70,26 @@ const AddBook = () => {
               </span>
             </label>
             <input
-                type="url"
-                placeholder="Valid Cover Image URL "
-                {...register('image', {
-                  required: 'Book cover image is required',
-                })}
-                className="input  input-bordered   w-full"
-              />
+              type="url"
+              placeholder="Valid Cover Image URL "
+              {...register("image", {
+                required: "Book cover image is required",
+              })}
+              className="input  input-bordered   w-full"
+            />
             {errors.image && (
               <span className="text-error text-sm mt-1">
                 {errors.image.message}
               </span>
             )}
-            
           </div>
 
           {/* Book Title */}
           <div className="form-control">
             <label className="label">
-              <span className="label-text font-medium">Book Title <span className="text-red-500">*</span></span>
+              <span className="label-text font-medium">
+                Book Title <span className="text-red-500">*</span>
+              </span>
             </label>
             <input
               type="text"
@@ -89,9 +111,12 @@ const AddBook = () => {
           </div>
 
           {/* Quantity */}
-          <div className="form-control">
+         <div className="grid grid-cols-2 gap-3">
+         <div className="form-control">
             <label className="label">
-              <span className="label-text font-medium">Quantity <span className="text-red-500">*</span></span>
+              <span className="label-text font-medium">
+                Quantity <span className="text-red-500">*</span>
+              </span>
             </label>
             <input
               type="number"
@@ -111,11 +136,38 @@ const AddBook = () => {
               </span>
             )}
           </div>
+          <div className="form-control">
+            <label className="label">
+              <span className="label-text font-medium">
+                Pages <span className="text-red-500">*</span>
+              </span>
+            </label>
+            <input
+              type="number"
+              className="input input-bordered"
+              placeholder="Enter total page number"
+              {...register("pages", {
+                required: "Pages is required",
+                min: {
+                  value: 1,
+                  message: "Pages must be at least 1",
+                },
+              })}
+            />
+            {errors.pages && (
+              <span className="text-error text-sm mt-1">
+                {errors.pages.message}
+              </span>
+            )}
+          </div>
+         </div>
 
           {/* Author Name */}
           <div className="form-control">
             <label className="label">
-              <span className="label-text font-medium">Author Name <span className="text-red-500">*</span></span>
+              <span className="label-text font-medium">
+                Author Name <span className="text-red-500">*</span>
+              </span>
             </label>
             <input
               type="text"
@@ -139,7 +191,9 @@ const AddBook = () => {
           {/* Category */}
           <div className="form-control">
             <label className="label">
-              <span className="label-text font-medium">Category <span className="text-red-500">*</span></span>
+              <span className="label-text font-medium">
+                Category <span className="text-red-500">*</span>
+              </span>
             </label>
             <select
               className="select select-bordered"
@@ -164,7 +218,9 @@ const AddBook = () => {
           {/* Short Description */}
           <div className="form-control">
             <label className="label">
-              <span className="label-text font-medium">Short Description <span className="text-red-500">*</span></span>
+              <span className="label-text font-medium">
+                Short Description <span className="text-red-500">*</span>
+              </span>
             </label>
             <textarea
               className="textarea textarea-bordered h-24 resize-none"
@@ -186,7 +242,9 @@ const AddBook = () => {
           {/* Rating */}
           <div className="form-control">
             <label className="label">
-              <span className="label-text font-medium">Rating (1-5) <span className="text-red-500">*</span></span>
+              <span className="label-text font-medium">
+                Rating (1-5) <span className="text-red-500">*</span>
+              </span>
             </label>
             <input
               type="number"
@@ -216,7 +274,9 @@ const AddBook = () => {
           {/* Book Content */}
           <div className="form-control">
             <label className="label">
-              <span className="label-text font-medium">About Book <span className="text-red-500">*</span></span>
+              <span className="label-text font-medium">
+                About Book <span className="text-red-500">*</span>
+              </span>
             </label>
             <textarea
               className="textarea textarea-bordered h-24 resize-none"
