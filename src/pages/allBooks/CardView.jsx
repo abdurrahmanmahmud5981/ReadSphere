@@ -1,18 +1,23 @@
+/* eslint-disable react/prop-types */
 import { Rating } from "@smastrom/react-rating";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-const CardView = ({containerVariants , filteredBooks, itemVariants}) => (
+import useAuth from "../../hooks/useAuth";
+const CardView = ({containerVariants , filteredBooks, itemVariants}) => {
+  const {user} = useAuth()
+  return (
+     
     <motion.div
       variants={containerVariants}
       initial="hidden"
       animate="visible"
       className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6"
     >
-      {filteredBooks.map((book) => (
+      {filteredBooks?.map((book) => (
         <motion.div
         key={book?._id}
           variants={itemVariants}
-          whileHover={{ scale: 1.02 }}
+         
           className="card relative  bg-base-100 shadow-xl hover:shadow-2xl transition-all duration-300 "
         >
           {/* Image Section */}
@@ -66,8 +71,9 @@ const CardView = ({containerVariants , filteredBooks, itemVariants}) => (
             {/* Action Buttons */}
             <div className="card-actions  mt-4">
               <Link
+                
                 to={`/updateBook/${book?._id}`}
-                className="py-3 px-6 text-center w-full border rounded-full font-semibold hover:bg-primary hover:text-white transition-colors duration-300"
+                className={`py-3 btn px-6 text-center w-full border rounded-full font-semibold hover:bg-primary hover:text-white transition-colors duration-300 ${user?.email !== book?.publisherEmail ? " btn-disabled" : ""}`}
               >
                 Update
               </Link>
@@ -76,6 +82,7 @@ const CardView = ({containerVariants , filteredBooks, itemVariants}) => (
         </motion.div>
       ))}
     </motion.div>
-  );
+  )
+}
 
 export default CardView;
