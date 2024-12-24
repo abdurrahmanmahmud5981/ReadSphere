@@ -1,15 +1,12 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
-import toast from "react-hot-toast";
-
+import Swal from "sweetalert2";
 import { axiosSecure } from "../../hooks/useAxiosSecure";
 import useAuth from "../../hooks/useAuth";
 
 const AddBook = () => {
-  const {user} = useAuth()
-  console.log(user);
+  const { user } = useAuth();
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
@@ -21,7 +18,7 @@ const AddBook = () => {
   } = useForm();
 
   const categories = [
-    "Ficton",
+    "Fiction",
     "Non-Fiction",
     "Philosophical",
     "Children's Books",
@@ -29,7 +26,6 @@ const AddBook = () => {
   const onSubmit = async (data) => {
     try {
       setLoading(true);
-      console.log(data);
 
       // Add book to database
       const formData = {
@@ -41,19 +37,28 @@ const AddBook = () => {
         bookRating: parseFloat(data.rating),
         pages: parseInt(data.pages),
         publisher: user?.displayName,
-        publisherEmail: user?.email ,
+        publisherEmail: user?.email,
         bookContent: data.aboutBook,
-        
+
         shortDescription: data.description,
       };
-      console.log(formData);
-      toast.success("Book added successfully!");
-      // reset();
+      await axiosSecure.post("/books/add", formData);
 
-      // navigate("/all-books");
+      Swal.fire({
+        position: "center",
+        icon: "success",
+        title: "Book added successfully!",
+      });
+      reset();
+      navigate("/allBooks");
     } catch (error) {
       console.error("Error adding book:", error);
-      toast.error("Failed to add book. Please try again.");
+
+      Swal.fire({
+        title: "Opps!",
+        text: "Failed to add book. Please try again.",
+        icon: "error",
+      });
     } finally {
       setLoading(false);
     }
@@ -114,56 +119,56 @@ const AddBook = () => {
           </div>
 
           {/* Quantity */}
-         <div className="grid grid-cols-2 gap-3">
-         <div className="form-control">
-            <label className="label">
-              <span className="label-text font-medium">
-                Quantity <span className="text-red-500">*</span>
-              </span>
-            </label>
-            <input
-              type="number"
-              className="input input-bordered"
-              placeholder="Enter quantity"
-              {...register("quantity", {
-                required: "Quantity is required",
-                min: {
-                  value: 1,
-                  message: "Quantity must be at least 1",
-                },
-              })}
-            />
-            {errors.quantity && (
-              <span className="text-error text-sm mt-1">
-                {errors.quantity.message}
-              </span>
-            )}
+          <div className="grid grid-cols-2 gap-3">
+            <div className="form-control">
+              <label className="label">
+                <span className="label-text font-medium">
+                  Quantity <span className="text-red-500">*</span>
+                </span>
+              </label>
+              <input
+                type="number"
+                className="input input-bordered"
+                placeholder="Enter quantity"
+                {...register("quantity", {
+                  required: "Quantity is required",
+                  min: {
+                    value: 1,
+                    message: "Quantity must be at least 1",
+                  },
+                })}
+              />
+              {errors.quantity && (
+                <span className="text-error text-sm mt-1">
+                  {errors.quantity.message}
+                </span>
+              )}
+            </div>
+            <div className="form-control">
+              <label className="label">
+                <span className="label-text font-medium">
+                  Pages <span className="text-red-500">*</span>
+                </span>
+              </label>
+              <input
+                type="number"
+                className="input input-bordered"
+                placeholder="Enter total page number"
+                {...register("pages", {
+                  required: "Pages is required",
+                  min: {
+                    value: 1,
+                    message: "Pages must be at least 1",
+                  },
+                })}
+              />
+              {errors.pages && (
+                <span className="text-error text-sm mt-1">
+                  {errors.pages.message}
+                </span>
+              )}
+            </div>
           </div>
-          <div className="form-control">
-            <label className="label">
-              <span className="label-text font-medium">
-                Pages <span className="text-red-500">*</span>
-              </span>
-            </label>
-            <input
-              type="number"
-              className="input input-bordered"
-              placeholder="Enter total page number"
-              {...register("pages", {
-                required: "Pages is required",
-                min: {
-                  value: 1,
-                  message: "Pages must be at least 1",
-                },
-              })}
-            />
-            {errors.pages && (
-              <span className="text-error text-sm mt-1">
-                {errors.pages.message}
-              </span>
-            )}
-          </div>
-         </div>
 
           {/* Author Name */}
           <div className="form-control">
