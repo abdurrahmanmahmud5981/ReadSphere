@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import { axiosSecure } from "../../hooks/useAxiosSecure";
 import useAuth from "../../hooks/useAuth";
+import { Helmet } from "react-helmet";
 
 const AddBook = () => {
   const { user } = useAuth();
@@ -65,7 +66,16 @@ const AddBook = () => {
   };
 
   return (
-    <div className=" mx-auto ">
+    <>
+      <Helmet>
+        <title>Add Book - ReadSphere</title>
+        <meta name="description" content="Add new book to the ReadSphere." />
+        <meta property="og:title" content="Add Book - ReadSphere" />
+        <meta
+          property="og:description"
+          content="Add new book to the ReadSphere."
+        />
+      </Helmet>
       <div className="max-w-2xl mx-auto bg-white rounded-xl  p-8 bg-gradient-to-br from-purple-200/60 via-white/30 to-purple-400/40 shadow-xl hover:shadow-2xl transition-shadow">
         <h1 className="text-3xl font-bold text-center mb-8 ">Add New Book</h1>
 
@@ -313,7 +323,7 @@ const AddBook = () => {
           </button>
         </form>
       </div>
-    </div>
+    </>
   );
 };
 

@@ -67,11 +67,18 @@ const Register = () => {
   return (
     <>
       <Helmet>
-        <title>Register - Visa Navigator</title>
-        <meta name="description" content="Register for Visa Navigator" />
-        <meta name="og:title" content="Register - Visa Navigator" />
+        <title>Register - ReadSphere</title>
+        <meta
+          name="description"
+          content="Create an account on ReadSphere."
+        />
+        <meta property="og:title" content="Register - ReadSphere" />
+        <meta
+          property="og:description"
+          content="Create an account on ReadSphere."
+        />
       </Helmet>
-      <div className="min-h-screen flex items-center justify-center  sm:bg-gray-50 py-12  sm:px-6 lg:px-8">
+      <div className=" flex items-center justify-center  ">
         <div className="max-w-lg w-full">
           <div className="card border px-0 sm:p-6 bg-base-100 shadow-xl mx-auto">
             <h2 className="mt-6 text-center text-3xl font-extrabold ">

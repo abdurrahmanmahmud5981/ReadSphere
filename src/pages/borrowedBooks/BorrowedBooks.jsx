@@ -3,6 +3,7 @@ import useAuth from "../../hooks/useAuth";
 import { axiosSecure } from "../../hooks/useAxiosSecure";
 import { motion } from "framer-motion";
 import Swal from "sweetalert2";
+import { Helmet } from "react-helmet";
 const BorrowedBooks = () => {
   const { user } = useAuth();
   const [borrowedBooks, setBorrowedBooks] = useState([]);
@@ -66,6 +67,18 @@ const BorrowedBooks = () => {
   };
   return (
     <>
+      <Helmet>
+        <title>My Borrowed Books - ReadSphere</title>
+        <meta
+          name="description"
+          content="View all your borrowed books and return them if needed."
+        />
+        <meta property="og:title" content="My Borrowed Books - ReadSphere" />
+        <meta
+          property="og:description"
+          content="View all your borrowed books and return them if needed."
+        />
+      </Helmet>
       <h1 className="text-3xl font-bold text-center mb-8">My Borrowed Books</h1>
 
       {borrowedBooks.length === 0 ? (

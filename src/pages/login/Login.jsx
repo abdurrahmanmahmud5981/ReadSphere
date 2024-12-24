@@ -48,8 +48,15 @@ const Login = () => {
     
     return (
         <>
-  
-          <div className="min-h-screen flex items-center justify-center  sm:bg-gray-50 py-12  sm:px-6 lg:px-8">
+          <Helmet>
+            <title>Login - ReadSphere</title>
+            <meta
+              name="description"
+              content="Login to your account on ReadSphere."
+            />
+            <meta property="og:title" content="Login - ReadSphere" />
+          </Helmet>
+          <div className=" flex items-center justify-center    ">
             <div className="max-w-md w-full">
               <div className="card border px-0 sm:p-6 bg-base-100 shadow-xl mx-auto">
                 <h2 className="mt-6 text-center text-3xl font-extrabold ">

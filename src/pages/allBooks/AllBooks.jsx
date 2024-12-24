@@ -5,6 +5,7 @@ import { axiosSecure } from "../../hooks/useAxiosSecure";
 
 import CardView from "./CardView";
 import TableView from "./TableView";
+import { Helmet } from "react-helmet";
 const AllBooks = () => {
   const [books, setBooks] = useState([]);
   const [viewMode, setViewMode] = useState("card");
@@ -46,59 +47,66 @@ const AllBooks = () => {
   };
 
   return (
-    <div className=" mx-auto  py-8">
-      <motion.div
-        initial={{ y: -80, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        className=" "
-      >
-        <h1 className="text-3xl font-bold text-center mb-10">All Books</h1>
-
-        <div className="flex flex-col md:flex-row justify-between mb-8 gap-4">
-          <button
-            className={`btn ${
-              showOnlyAvailable ? "btn-primary" : "btn-outline"
-            }`}
-            onClick={() => setShowOnlyAvailable(!showOnlyAvailable)}
-          >
-            {showOnlyAvailable ? "Show All Books" : "Show Available Books"}
-          </button>
-          {/* change view  */}
-          <select
-            className="select select-bordered w-full max-w-xs"
-            value={viewMode}
-            onChange={(e) => setViewMode(e.target.value)}
-          >
-            <option value="card">Card View</option>
-            <option value="table">Table View</option>
-          </select>
-        </div>
-      </motion.div>
-
-      <AnimatePresence mode="wait">
+    <>
+    <Helmet>
+      <title>All Books - ReadSphere</title>
+      <meta name="description" content="All books in the ReadSphere." />
+      <meta property="og:title" content="All Books - ReadSphere" />
+    </Helmet>
+      <div className=" mx-auto  py-8">
         <motion.div
-          // key={viewMode}
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: -20 }}
-          transition={{ duration: 0.2 }}
+          initial={{ y: -10, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          className=" "
         >
-          {viewMode === "card" ? (
-            <CardView
-              containerVariants={containerVariants}
-              filteredBooks={filteredBooks}
-              itemVariants={itemVariants}
-            />
-          ) : (
-            <TableView
-              containerVariants={containerVariants}
-              filteredBooks={filteredBooks}
-              itemVariants={itemVariants}
-            />
-          )}
+          <h1 className="text-3xl font-bold text-center mb-10">All Books</h1>
+
+          <div className="flex flex-col md:flex-row justify-between mb-8 gap-4">
+            <button
+              className={`btn ${
+                showOnlyAvailable ? "btn-primary" : "btn-outline"
+              }`}
+              onClick={() => setShowOnlyAvailable(!showOnlyAvailable)}
+            >
+              {showOnlyAvailable ? "Show All Books" : "Show Available Books"}
+            </button>
+            {/* change view  */}
+            <select
+              className="select select-bordered w-full max-w-xs"
+              value={viewMode}
+              onChange={(e) => setViewMode(e.target.value)}
+            >
+              <option value="card">Card View</option>
+              <option value="table">Table View</option>
+            </select>
+          </div>
         </motion.div>
-      </AnimatePresence>
-    </div>
+
+        <AnimatePresence mode="wait">
+          <motion.div
+            // key={viewMode}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            transition={{ duration: 0.2 }}
+          >
+            {viewMode === "card" ? (
+              <CardView
+                containerVariants={containerVariants}
+                filteredBooks={filteredBooks}
+                itemVariants={itemVariants}
+              />
+            ) : (
+              <TableView
+                containerVariants={containerVariants}
+                filteredBooks={filteredBooks}
+                itemVariants={itemVariants}
+              />
+            )}
+          </motion.div>
+        </AnimatePresence>
+      </div>
+    </>
   );
 };
 

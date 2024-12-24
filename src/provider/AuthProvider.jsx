@@ -12,6 +12,7 @@ import {
   updateProfile,
 } from "firebase/auth";
 import auth from "../firebase/firebase.config";
+import LoadingSpinner from "../components/LoadingSpinner";
 
 // eslint-disable-next-line react/prop-types
 const AuthProvider = ({ children }) => {
@@ -73,7 +74,7 @@ const AuthProvider = ({ children }) => {
   };
 
   if (loader) {
-    return <p>Loding ......</p>;
+    return <LoadingSpinner/>
   }
   return (
     <AuthContext.Provider value={userInformation}>
