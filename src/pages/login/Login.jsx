@@ -24,7 +24,7 @@ const Login = () => {
           await signIn(email, password);
           toast.success("Logged in successfully");
           navigate(state || "/");
-        //   form.reset();
+          form.reset();
           setForgotEmail("");
         } catch {
           setError("Invalid email or password");
@@ -34,7 +34,7 @@ const Login = () => {
       const handleGoogleSignIn = async () => {
         try {
           await googleSignIn();
-        //   navigate(state || "/");
+          navigate(state || "/");
           toast.success("Logged in successfully with Google", {
             duration: 4000,
             position: "top-center",
@@ -48,10 +48,7 @@ const Login = () => {
     
     return (
         <>
-          <Helmet>
-            <title> Login - Visa Navigator</title>
-            <meta name="description" content="Login to your visa navigator account." />
-          </Helmet>
+  
           <div className="min-h-screen flex items-center justify-center  sm:bg-gray-50 py-12  sm:px-6 lg:px-8">
             <div className="max-w-md w-full">
               <div className="card border px-0 sm:p-6 bg-base-100 shadow-xl mx-auto">

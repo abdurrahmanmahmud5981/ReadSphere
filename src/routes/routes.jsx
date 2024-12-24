@@ -10,11 +10,12 @@ import Category from "../pages/category/Category";
 import BookDetails from "../pages/bookDetails/BookDetails";
 import UpdateBook from "../pages/updateBook/UpdateBook";
 import PrivateRoute from "./PrivetRoutes";
+import NotFound from "../pages/notFound/NotFound";
 
 const routes = createBrowserRouter([
   {
     path: "/",
-    errorElement: <h2>Error 404</h2>,
+    errorElement: <NotFound/>,
     element: <MainLayout />,
     children: [
       {
