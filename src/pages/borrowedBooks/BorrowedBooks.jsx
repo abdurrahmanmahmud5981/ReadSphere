@@ -21,9 +21,11 @@ const BorrowedBooks = () => {
 
 
   // handle return book
-  const handleReturnBook = async (id) => {
+  const handleReturnBook = async (id,bookId) => {
     try {
-      await axiosSecure.delete(`/borrowed-books/${id}`);
+      console.log(bookId);
+      console.log(id);
+      await axiosSecure.delete(`/borrowed-books/${id}?bookId=${bookId}`);
       setBorrowedBooks((prevBooks) =>
         prevBooks.filter((book) => book._id !== id)
       );
@@ -104,7 +106,7 @@ const BorrowedBooks = () => {
                 </h3>
                 {/* Action Buttons */}
                 <div className="card-actions  mt-4">
-                  <button onClick={()=> handleReturnBook(book?._id)} className="btn btn-neutral">Return Book</button>
+                  <button onClick={()=> handleReturnBook(book?._id, book?.bookId)} className="btn btn-neutral">Return Book</button>
                 </div>
               </div>
             </motion.div>
