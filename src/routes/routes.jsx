@@ -9,52 +9,72 @@ import BorrowedBooks from "../pages/borrowedBooks/BorrowedBooks";
 import Category from "../pages/category/Category";
 import BookDetails from "../pages/bookDetails/BookDetails";
 import UpdateBook from "../pages/updateBook/UpdateBook";
+import PrivateRoute from "./PrivetRoutes";
 
 const routes = createBrowserRouter([
-    {
-        path: "/",
-        errorElement: <h2>Error 404</h2>,
-        element: <MainLayout/>,
-        children:[
-            {
-                path: "",
-                element: <Home/>
-            },
-            {
-                path: "categories/:category",
-                element: <Category/>
-            },
-            {
-                path: "bookDetails/:id",
-                element: <BookDetails/>,
-                
-            },
-            {
-                path: "allBooks",
-                element: <AllBooks/>
-            },
-            {
-                path: "updateBook/:id",
-                element: <UpdateBook/>, 
-            },
-            {
-                path: "addBook",
-                element: <AddBook/>
-            },
-            {
-                path: "borrowedBooks",
-                element: <BorrowedBooks/>
-            },
-            {
-                path: "login",
-                element: <Login/>
-            },
-            {
-                path: "register",
-                element: <Register/>
-            }
-        ]
-    }
+  {
+    path: "/",
+    errorElement: <h2>Error 404</h2>,
+    element: <MainLayout />,
+    children: [
+      {
+        path: "",
+        element: <Home />,
+      },
+      {
+        path: "categories/:category",
+        element: <Category />,
+      },
+      {
+        path: "bookDetails/:id",
+        element: (
+          <PrivateRoute>
+            <BookDetails />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "allBooks",
+        element: (
+          <PrivateRoute>
+            <AllBooks />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "updateBook/:id",
+        element: (
+          <PrivateRoute>
+            <UpdateBook />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "addBook",
+        element: (
+          <PrivateRoute>
+            <AddBook />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "borrowedBooks",
+        element: (
+          <PrivateRoute>
+            <BorrowedBooks />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "login",
+        element: <Login />,
+      },
+      {
+        path: "register",
+        element: <Register />,
+      },
+    ],
+  },
 ]);
 
 export default routes;
