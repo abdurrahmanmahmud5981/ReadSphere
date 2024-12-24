@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { Rating } from "@smastrom/react-rating";
 import { useForm } from "react-hook-form";
 import { axiosSecure } from "../../hooks/useAxiosSecure";
@@ -7,6 +7,7 @@ import useAuth from "../../hooks/useAuth";
 import Swal from "sweetalert2";
 
 const BookDetails = () => {
+  const navigate = useNavigate()
   const { user } = useAuth();
   const { id } = useParams();
   const [book, setBook] = useState({});
@@ -61,11 +62,12 @@ const BookDetails = () => {
         icon: "success",
         title: "Book Borrowed successfully!",
       });
+      navigate("/borrowedBooks");
     } catch (error) {
       console.error("Error borrowing book:", error);
       Swal.fire({
         title: "Opps!",
-        text: "Failed to borrow book. Please try again.",
+        text: `${error?.response?.data?.message}`,
         icon: "error",
       });
     } finally {
@@ -136,10 +138,10 @@ const BookDetails = () => {
           <div className="card-actions justify-end mt-6">
             <button
               className={`btn py-3 px-6 text-center w-full border rounded-full font-semibold hover:bg-primary hover:text-white transition-colors duration-300 ${
-                book.quantity === 0 ? "btn-disabled" : ""
+                book.quantity === 0 || user?.email === book?.publisherEmail ? "btn-disabled" : ""
               }`}
               onClick={() => document.getElementById("my_modal_5").showModal()}
-              disabled={book.quantity === 0}
+              // disabled={book.quantity === 0 || user?.email === book?.publisherEmail}
             >
               {book.quantity > 0 ? "Borrow Now" : "Book Unavailable"}
             </button>
