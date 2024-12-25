@@ -1,8 +1,8 @@
 import { Link } from "react-router-dom";
-import categor1 from "../assets/categories/category_1.jpeg";
-import categor2 from "../assets/categories/category_2.jpeg";
-import categor3 from "../assets/categories/category_3.jpeg";
-import categor4 from "../assets/categories/category_4.jpeg";
+import categor1 from "../assets/categories/category_1.jpg";
+import categor2 from "../assets/categories/category_2.jpg";
+import categor3 from "../assets/categories/category_3.jpg";
+import categor4 from "../assets/categories/category_4.jpg";
 const Categories = () => {
   // Categories data
   const categories = [

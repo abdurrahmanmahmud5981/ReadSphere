@@ -4,9 +4,9 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 
-import banner1 from "../assets/banner/banner_1.jpeg";
-import banner2 from "../assets/banner/banner_2.jpeg";
-import banner3 from "../assets/banner/banner_3.jpeg";
+import banner1 from "../assets/banner/banner_1.jpg";
+import banner2 from "../assets/banner/banner_2.jpg";
+import banner3 from "../assets/banner/banner_3.jpg";
 
 const Slider = () => {
   // Banner data
