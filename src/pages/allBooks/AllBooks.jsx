@@ -6,22 +6,22 @@ import { axiosSecure } from "../../hooks/useAxiosSecure";
 import CardView from "./CardView";
 import TableView from "./TableView";
 import { Helmet } from "react-helmet";
+import { useQuery } from "@tanstack/react-query";
+import LoadingSpinner from "../../components/LoadingSpinner";
 const AllBooks = () => {
-  const [books, setBooks] = useState([]);
+ 
   const [viewMode, setViewMode] = useState("card");
   const [showOnlyAvailable, setShowOnlyAvailable] = useState(false);
+  const {data:books,isLoading,isError} = useQuery({ queryKey: ['all-books'], queryFn: async ()=>{
+    try {
+      const { data } = await axiosSecure.get(`/books`);
+      return data;
+    } catch (error) {
+      console.log(error);
+      throw error;
+    }
+  } })
 
-  useEffect(() => {
-    const fetchCategory = async () => {
-      try {
-        const { data } = await axiosSecure.get(`/books`);
-        setBooks(data);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    fetchCategory();
-  }, []);
 
   const filteredBooks = showOnlyAvailable
     ? books.filter((book) => book.quantity > 0)
@@ -38,12 +38,14 @@ const AllBooks = () => {
   };
 
   const itemVariants = {
-    hidden: { y: -20, opacity: 0 },
+    hidden: { y: -10, opacity: 0 },
     visible: {
       y: 0,
       opacity: 1,
     },
   };
+
+  if (isLoading) return <LoadingSpinner/>
 
   return (
     <>
@@ -54,7 +56,7 @@ const AllBooks = () => {
       </Helmet>
       <div className=" mx-auto  py-8">
         <motion.div
-          initial={{ y: -10, opacity: 0 }}
+          initial={{ y: 0, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           className=" "
         >

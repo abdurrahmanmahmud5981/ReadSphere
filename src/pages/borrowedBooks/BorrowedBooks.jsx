@@ -4,22 +4,34 @@ import { axiosSecure } from "../../hooks/useAxiosSecure";
 import { motion } from "framer-motion";
 import Swal from "sweetalert2";
 import { Helmet } from "react-helmet";
+
+import LoadingSpinner from "../../components/LoadingSpinner";
 const BorrowedBooks = () => {
-  const { user } = useAuth();
+  const { user,logOut } = useAuth();
   const [borrowedBooks, setBorrowedBooks] = useState([]);
+  const [loading, setLoading] = useState(false)
   console.log(new Date().toLocaleDateString());
   useEffect(() => {
+    setLoading(true);
     const fetchBorrowedBooks = async () => {
       try {
         // Fetch borrowed books for the logged in user
         const { data } = await axiosSecure.get(`/borrowed-books/${user.email}`);
         setBorrowedBooks(data);
+        setLoading(false);
       } catch (error) {
-        console.log(error);
+        if (error.response?.status === 401) {
+          logOut();
+        } else {
+          console.error("Error fetching services:", error.message);
+        }
+      } finally {
+        setLoading(false); // Always set loading to false
       }
     };
     fetchBorrowedBooks();
-  }, [user]);
+  }, [user,logOut]);
+   
 
   // handle return book
   const handleReturnBook = async (id, bookId) => {
@@ -65,6 +77,8 @@ const BorrowedBooks = () => {
       });
     }
   };
+
+  if (loading) return <LoadingSpinner/>
   return (
     <>
       <Helmet>

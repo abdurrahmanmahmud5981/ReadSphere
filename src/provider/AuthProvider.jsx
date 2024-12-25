@@ -54,7 +54,7 @@ const AuthProvider = ({ children }) => {
       if (currentUser?.email) {
         console.log("User Logged In");
         const { data } = await axiosSecure.post(
-          `${import.meta.env.VITE_API_URL}/jwt`,
+          `/jwt`,
           {
             email: currentUser?.email,
           }
@@ -63,7 +63,7 @@ const AuthProvider = ({ children }) => {
       } else {
         console.log("User Logged Out");
         const { data } = await axiosSecure.get(
-          `${import.meta.env.VITE_API_URL}/logout`
+          `/logout`
         );
         console.log(data);
       }

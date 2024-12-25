@@ -3,8 +3,12 @@ import Categories from "../../components/Categories";
 import Features from "../../components/Features";
 import Slider from "../../components/Slider";
 import Statistics from "../../components/Statistics";
+import useAuth from "../../hooks/useAuth";
+import LoadingSpinner from "../../components/LoadingSpinner";
 
 const Home = () => {
+  const {loader} = useAuth()
+  if (loader) return <LoadingSpinner/>
   return (
     <>
       <Helmet>

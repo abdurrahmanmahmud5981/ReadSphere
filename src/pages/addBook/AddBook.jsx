@@ -316,7 +316,7 @@ const AddBook = () => {
           {/* Submit Button */}
           <button
             type="submit"
-            className={`btn btn-neutral w-full ${loading ? "loading" : ""}`}
+            className={`btn btn-neutral w-full `}
             disabled={loading}
           >
             {loading ? "Adding Book..." : "Add Book"}
