@@ -2,20 +2,15 @@ import { useNavigate, useParams } from "react-router-dom";
 import { Rating } from "@smastrom/react-rating";
 import { useForm } from "react-hook-form";
 import { useQuery } from "@tanstack/react-query";
-import { axiosSecure } from "../../hooks/useAxiosSecure";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
 import useAuth from "../../hooks/useAuth";
 import Swal from "sweetalert2";
 import { Helmet } from "react-helmet";
 import LoadingSpinner from "../../components/LoadingSpinner";
 import GoBack from "../../components/GoBack";
 
-// Fetch book data using react-query
-const fetchBookDetails = async (id) => {
-  const { data } = await axiosSecure.get(`/books/book/${id}`);
-  return data;
-};
-
 const BookDetails = () => {
+  const axiosSecure = useAxiosSecure();
   const navigate = useNavigate();
   const { user } = useAuth();
   const { id } = useParams();
@@ -33,7 +28,11 @@ const BookDetails = () => {
       returnDate: "",
     },
   });
-
+  // Fetch book data using react-query
+  const fetchBookDetails = async (id) => {
+    const { data } = await axiosSecure.get(`/books/book/${id}`);
+    return data;
+  };
   // Calculate min and max return dates (3-14 days from today)
   const today = new Date();
   const minReturnDate = new Date(today);
@@ -114,7 +113,7 @@ const BookDetails = () => {
 
       <div className="relative">
         {/* Book Details Card */}
-        <GoBack/>
+        <GoBack />
         <div className="card md:card-side bg-base-100 shadow-xl max-w-screen-lg mx-auto my-8">
           <figure className="md:w-1/2 p-6 bg-purple-100">
             <img

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { axiosSecure } from "../../hooks/useAxiosSecure";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
 import CardView from "./CardView";
 import TableView from "./TableView";
 import { Helmet } from "react-helmet";
@@ -8,6 +8,7 @@ import { useQuery } from "@tanstack/react-query";
 import LoadingSpinner from "../../components/LoadingSpinner";
 
 const AllBooks = () => {
+  const axiosSecure = useAxiosSecure()
   const [viewMode, setViewMode] = useState("card");
   const [showOnlyAvailable, setShowOnlyAvailable] = useState(false);
 

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import useAuth from "../../hooks/useAuth";
-import { axiosSecure } from "../../hooks/useAxiosSecure";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
 import { motion } from "framer-motion";
 import Swal from "sweetalert2";
 import { Helmet } from "react-helmet";
@@ -8,6 +8,7 @@ import { Helmet } from "react-helmet";
 import LoadingSpinner from "../../components/LoadingSpinner";
 const BorrowedBooks = () => {
   const { user, logOut } = useAuth();
+  const axiosSecure = useAxiosSecure();
   const [borrowedBooks, setBorrowedBooks] = useState([]);
   const [loading, setLoading] = useState(false);
   useEffect(() => {
@@ -29,7 +30,7 @@ const BorrowedBooks = () => {
       }
     };
     fetchBorrowedBooks();
-  }, [user, logOut]);
+  }, [user, logOut, axiosSecure]);
 
   // handle return book
   const handleReturnBook = async (id, bookId) => {

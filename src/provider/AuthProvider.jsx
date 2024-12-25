@@ -13,10 +13,11 @@ import {
 } from "firebase/auth";
 import auth from "../firebase/firebase.config";
 import LoadingSpinner from "../components/LoadingSpinner";
-import { axiosSecure } from "../hooks/useAxiosSecure";
+import useAxiosSecure from "../hooks/useAxiosSecure";
 
 // eslint-disable-next-line react/prop-types
 const AuthProvider = ({ children }) => {
+  const axiosSecure = useAxiosSecure();
   const googleProvider = new GoogleAuthProvider();
   const [user, setUser] = useState(null);
   const [loader, setLoader] = useState(true);

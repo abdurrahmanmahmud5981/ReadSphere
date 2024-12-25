@@ -1,5 +1,5 @@
 import { useParams } from "react-router-dom";
-import { axiosSecure } from "../../hooks/useAxiosSecure";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
 import SingleBook from "../../components/SingleBook";
 import { useQuery } from "@tanstack/react-query";
 import LoadingSpinner from "../../components/LoadingSpinner";
@@ -7,7 +7,7 @@ import GoBack from "../../components/GoBack";
 
 const Category = () => {
   const { category } = useParams();
-
+  const axiosSecure = useAxiosSecure();
   // Fetch books of the category using react-query
   const {
     data: booksOfCategory = [],
@@ -34,12 +34,12 @@ const Category = () => {
 
   return (
     <>
-    <GoBack/>
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-      {booksOfCategory?.map((book) => (
-        <SingleBook key={book?._id} book={book} />
-      ))}
-    </div>
+      <GoBack />
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+        {booksOfCategory?.map((book) => (
+          <SingleBook key={book?._id} book={book} />
+        ))}
+      </div>
     </>
   );
 };

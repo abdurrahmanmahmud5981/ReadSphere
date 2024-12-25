@@ -2,11 +2,12 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
-import { axiosSecure } from "../../hooks/useAxiosSecure";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
 import useAuth from "../../hooks/useAuth";
 import { Helmet } from "react-helmet";
 
 const AddBook = () => {
+  const axiosSecure = useAxiosSecure();
   const { user } = useAuth();
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
