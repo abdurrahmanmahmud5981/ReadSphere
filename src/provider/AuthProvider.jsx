@@ -52,20 +52,11 @@ const AuthProvider = ({ children }) => {
       setUser(currentUser);
       setLoader(false);
       if (currentUser?.email) {
-        console.log("User Logged In");
-        const { data } = await axiosSecure.post(
-          `/jwt`,
-          {
-            email: currentUser?.email,
-          }
-        );
-        console.log('kjdshfkjadhfakdsa',data);
+        await axiosSecure.post(`/jwt`, {
+          email: currentUser?.email,
+        });
       } else {
-        console.log("User Logged Out");
-        const { data } = await axiosSecure.get(
-          `/logout`
-        );
-        console.log(data);
+        await axiosSecure.get(`/logout`);
       }
       return () => {
         unsubscribe();

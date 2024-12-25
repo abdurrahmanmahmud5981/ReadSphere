@@ -76,7 +76,6 @@ const UpdateBook = () => {
         bookContent: data.aboutBook,
         shortDescription: data.description,
       };
-      console.log(formData);
       await axiosSecure.put(`/books/update/${id}`, formData);
 
       Swal.fire({

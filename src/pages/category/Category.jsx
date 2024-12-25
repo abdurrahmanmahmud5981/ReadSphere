@@ -6,15 +6,14 @@ import SingleBook from "../../components/SingleBook";
 const Category = () => {
   const { category } = useParams();
   const [booksOfCategory, setBooksOfCategory] = useState([]);
-  console.log(category);
   useEffect(() => {
     const fetchCategory = async () => {
       try {
         const { data } = await axiosSecure.get(`/books/categories/${category}`);
-        console.log(data);
         setBooksOfCategory(data);
       } catch (error) {
-        console.log(error);
+      
+        console.error("Error fetching books:", error.message);
       }
     };
     fetchCategory();

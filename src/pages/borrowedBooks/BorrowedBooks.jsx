@@ -10,7 +10,6 @@ const BorrowedBooks = () => {
   const { user,logOut } = useAuth();
   const [borrowedBooks, setBorrowedBooks] = useState([]);
   const [loading, setLoading] = useState(false)
-  console.log(new Date().toLocaleDateString());
   useEffect(() => {
     setLoading(true);
     const fetchBorrowedBooks = async () => {
