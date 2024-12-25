@@ -3,10 +3,11 @@ import { Rating } from "@smastrom/react-rating";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import useAuth from "../../hooks/useAuth";
-const CardView = ({containerVariants , filteredBooks, itemVariants}) => {
-  const {user} = useAuth()
+
+const CardView = ({ containerVariants, filteredBooks, itemVariants }) => {
+  const { user } = useAuth();
+
   return (
-     
     <motion.div
       variants={containerVariants}
       initial="hidden"
@@ -15,74 +16,69 @@ const CardView = ({containerVariants , filteredBooks, itemVariants}) => {
     >
       {filteredBooks?.map((book) => (
         <motion.div
-        key={book?._id}
+          key={book?._id}
           variants={itemVariants}
-         
-          className="card relative  bg-base-100 shadow-xl hover:shadow-2xl transition-all duration-300 "
+          className="card relative bg-base-100 shadow-xl hover:shadow-2xl transition-all duration-300"
         >
           {/* Image Section */}
-          <figure className=" h-48 bg-primary/20 relative overflow-hidden">
+          <figure className="h-48 bg-primary/20 relative overflow-hidden flex items-center justify-center">
             <img
               src={book?.imageUrl}
               alt={book?.bookName}
-              className="w-28 h-44  object-cover rounded-md"
+              className="w-28 h-44 object-cover rounded-md"
             />
-            {/* Quantity Badge */}
-            <div className="absolute top-4  border-none badge-sm font-medium right-2 badge ">
-              {/* {quantity} available */}
+            {/* Category Badge */}
+            <div className="absolute top-4 right-2 badge badge-sm font-medium border-none">
               {book?.bookCategory}
             </div>
           </figure>
 
-          <div className="card-body p-4  ">
-            {/* Book Details */}
-
+          {/* Book Details */}
+          <div className="card-body p-4 flex flex-col">
             <h2 className="card-title font-bold text-lg">{book?.bookName}</h2>
+            <p className="text-sm">
+              By: <span className="font-medium">{book?.authorName}</span>
+            </p>
 
-            <div className="space-y-2 flex-grow">
-              <p className="text-sm">
-                By: <span className="font-medium">{book?.authorName}</span>
-              </p>
-
-              {/* Rating */}
-              <div className="flex items-center gap-4">
-                <div className="flex items-center gap-2">
-                  <Rating
-                    className="max-w-20"
-                    readOnly
-                    value={book?.bookRating}
-                  />
-                  <span className="text-sm">({book?.bookRating})</span>
-                </div>
-
-                {/* Quantity Badge */}
-                <div
-                  className={`h-full whitespace-nowrap   badge border-none badge-sm font-medium ${
-                    book?.quantity > 0 ? "bg-primary text-white" : "text-error"
-                  }`}
-                >
-                  {book?.quantity > 0
-                    ? `${book?.quantity} Available`
-                    : "Borrowed"}
-                </div>
+            {/* Rating and Quantity */}
+            <div className="flex items-center gap-4 mt-2">
+              <div className="flex items-center gap-2">
+                <Rating
+                  className="max-w-20"
+                  readOnly
+                  value={book?.bookRating}
+                />
+                <span className="text-sm">({book?.bookRating})</span>
+              </div>
+              <div
+                className={`badge badge-sm font-medium ${
+                  book?.quantity > 0
+                    ? "bg-primary text-white"
+                    : "text-error bg-gray-200"
+                }`}
+              >
+                {book?.quantity > 0
+                  ? `${book?.quantity} Available`
+                  : "Borrowed"}
               </div>
             </div>
 
-            {/* Action Buttons */}
-            <div className="card-actions  mt-4">
-              <Link
-                
-                to={`/updateBook/${book?._id}`}
-                className={`py-3 btn px-6 text-center w-full border rounded-full font-semibold hover:bg-primary hover:text-white transition-colors duration-300 ${user?.email !== book?.publisherEmail ? " btn-disabled" : ""}`}
-              >
-                Update
-              </Link>
-            </div>
+            {/* Update Button */}
+            <Link
+              to={`/updateBook/${book?._id}`}
+              className={`btn w-full mt-4 rounded-full font-semibold transition-colors duration-300 ${
+                user?.email === book?.publisherEmail
+                  ? "hover:bg-primary hover:text-white"
+                  : "btn-disabled"
+              }`}
+            >
+              Update
+            </Link>
           </div>
         </motion.div>
       ))}
     </motion.div>
-  )
-}
+  );
+};
 
 export default CardView;

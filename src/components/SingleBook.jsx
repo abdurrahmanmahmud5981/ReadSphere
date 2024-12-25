@@ -1,8 +1,9 @@
 /* eslint-disable react/prop-types */
 import { Link } from "react-router-dom";
 import { Rating } from "@smastrom/react-rating";
-const SingleBook = ({ book }) => {
-  const {
+
+const SingleBook = ({
+  book: {
     _id,
     imageUrl,
     bookName,
@@ -10,27 +11,26 @@ const SingleBook = ({ book }) => {
     quantity,
     bookRating,
     bookCategory,
-  } = book;
+  },
+}) => {
+  const isAvailable = quantity > 0;
 
   return (
-    <div className="card relative  bg-base-100 shadow-xl hover:shadow-2xl transition-all duration-300 ">
+    <div className="card bg-base-100 shadow-xl hover:shadow-2xl transition-all duration-300 relative">
       {/* Image Section */}
-      <figure className=" h-48 bg-primary/20 relative overflow-hidden">
+      <figure className="h-48 bg-primary/20 relative overflow-hidden flex items-center justify-center">
         <img
           src={imageUrl}
-          alt={bookName}
-          className="w-28 h-44  object-cover rounded-md"
+          alt={bookName || "Book Cover"}
+          className="w-28 h-44 object-cover rounded-md"
         />
-        {/* Quantity Badge */}
-        <div className="absolute top-4  border-none badge-sm font-medium right-2 badge ">
-          {/* {quantity} available */}
+        <div className="badge badge-sm font-medium absolute top-4 right-2 border-none">
           {bookCategory}
         </div>
       </figure>
 
-      <div className="card-body p-4 ">
-        {/* Book Details */}
-
+      {/* Card Body */}
+      <div className="card-body p-4">
         <h2 className="card-title font-bold text-lg">{bookName}</h2>
 
         <div className="space-y-2">
@@ -38,29 +38,27 @@ const SingleBook = ({ book }) => {
             By: <span className="font-medium">{authorName}</span>
           </p>
 
-          {/* Rating */}
-          <div className="flex items-center gap-4">
+          {/* Rating and Quantity */}
+          <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
               <Rating className="max-w-20" readOnly value={bookRating} />
               <span className="text-sm">({bookRating})</span>
             </div>
-
-            {/* Quantity Badge */}
             <div
-              className={`   badge border-none badge-sm font-medium ${
-                quantity > 0 ? "bg-primary text-white" : "text-error"
+              className={`badge badge-sm font-medium ${
+                isAvailable ? "bg-primary text-white" : "text-error"
               }`}
             >
-              {quantity > 0 ? `${quantity} Available` : "Borrowed"}
+              {isAvailable ? `${quantity} Available` : "Borrowed"}
             </div>
           </div>
         </div>
 
-        {/* Action Buttons */}
-        <div className="card-actions  mt-4">
+        {/* Details Button */}
+        <div className="card-actions mt-4">
           <Link
             to={`/bookDetails/${_id}`}
-            className="py-3 px-6 text-center w-full border rounded-full font-semibold hover:bg-primary hover:text-white transition-colors duration-300"
+            className="btn  w-full py-2 px-6 rounded-full font-semibold hover:bg-primary hover:text-white transition-all duration-300"
           >
             Details
           </Link>

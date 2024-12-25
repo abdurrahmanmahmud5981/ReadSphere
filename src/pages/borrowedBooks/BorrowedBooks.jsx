@@ -7,9 +7,9 @@ import { Helmet } from "react-helmet";
 
 import LoadingSpinner from "../../components/LoadingSpinner";
 const BorrowedBooks = () => {
-  const { user,logOut } = useAuth();
+  const { user, logOut } = useAuth();
   const [borrowedBooks, setBorrowedBooks] = useState([]);
-  const [loading, setLoading] = useState(false)
+  const [loading, setLoading] = useState(false);
   useEffect(() => {
     setLoading(true);
     const fetchBorrowedBooks = async () => {
@@ -29,8 +29,7 @@ const BorrowedBooks = () => {
       }
     };
     fetchBorrowedBooks();
-  }, [user,logOut]);
-   
+  }, [user, logOut]);
 
   // handle return book
   const handleReturnBook = async (id, bookId) => {
@@ -48,7 +47,6 @@ const BorrowedBooks = () => {
       if (result.isConfirmed) {
         try {
           await axiosSecure.delete(`/borrowed-books/${id}?bookId=${bookId}`);
-
           setBorrowedBooks((prevBooks) =>
             prevBooks.filter((book) => book._id !== id)
           );
@@ -77,7 +75,7 @@ const BorrowedBooks = () => {
     }
   };
 
-  if (loading) return <LoadingSpinner/>
+  if (loading) return <LoadingSpinner />;
   return (
     <>
       <Helmet>

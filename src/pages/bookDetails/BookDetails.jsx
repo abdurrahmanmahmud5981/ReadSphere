@@ -1,17 +1,24 @@
-import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { Rating } from "@smastrom/react-rating";
 import { useForm } from "react-hook-form";
+import { useQuery } from "@tanstack/react-query";
 import { axiosSecure } from "../../hooks/useAxiosSecure";
 import useAuth from "../../hooks/useAuth";
 import Swal from "sweetalert2";
 import { Helmet } from "react-helmet";
+import LoadingSpinner from "../../components/LoadingSpinner";
+import GoBack from "../../components/GoBack";
+
+// Fetch book data using react-query
+const fetchBookDetails = async (id) => {
+  const { data } = await axiosSecure.get(`/books/book/${id}`);
+  return data;
+};
 
 const BookDetails = () => {
   const navigate = useNavigate();
   const { user } = useAuth();
   const { id } = useParams();
-  const [book, setBook] = useState({});
 
   const {
     register,
@@ -34,18 +41,17 @@ const BookDetails = () => {
   const maxReturnDate = new Date(today);
   maxReturnDate.setDate(today.getDate() + 14);
 
-  // Fetch book details from API
-  useEffect(() => {
-    const fetchCategory = async () => {
-      try {
-        const { data } = await axiosSecure.get(`/books/book/${id}`);
-        setBook(data);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    fetchCategory();
-  }, [id]);
+  // Fetch book details with React Query
+  const {
+    data: book,
+    isLoading,
+    isError,
+    error,
+  } = useQuery({
+    queryKey: ["bookDetails", id],
+    queryFn: () => fetchBookDetails(id),
+  });
+
   const onSubmit = async (data) => {
     try {
       const borrowedBook = {
@@ -58,16 +64,16 @@ const BookDetails = () => {
         returnDate: data.returnDate,
       };
       await axiosSecure.post(`/books/borrow`, borrowedBook);
+      navigate("/borrowedBooks");
       Swal.fire({
         position: "center",
         icon: "success",
         title: "Book Borrowed successfully!",
       });
-      navigate("/borrowedBooks");
     } catch (error) {
       console.error("Error borrowing book:", error);
       Swal.fire({
-        title: "Opps!",
+        title: "Oops!",
         text: `${error?.response?.data?.message}`,
         icon: "error",
       });
@@ -76,28 +82,39 @@ const BookDetails = () => {
     }
   };
 
-  // close the modal
+  // Close the modal
   const closeModal = () => {
     document.getElementById("my_modal_5").close();
     setValue("returnDate", "");
   };
 
+  // If data is loading or error occurs
+  if (isLoading) {
+    return <LoadingSpinner />;
+  }
+
+  if (isError) {
+    return <div>Error: {error?.message}</div>;
+  }
+
   return (
     <>
-    <Helmet>
-      <title>{`${book?.bookName}`}- ReadSphere</title>
-      <meta
-        name="description"
-        content={`Check out ${book?.bookName} by ${book?.authorName} on ReadSphere.`}
-      />
-      <meta property="og:title" content={`${book?.bookName} - ReadSphere`} />
-      <meta
-        property="og:description"
-        content={`Check out ${book?.bookName} by ${book?.authorName} on ReadSphere.`}
-      />
-    </Helmet>
+      <Helmet>
+        <title>{`${book?.bookName}`}- ReadSphere</title>
+        <meta
+          name="description"
+          content={`Check out ${book?.bookName} by ${book?.authorName} on ReadSphere.`}
+        />
+        <meta property="og:title" content={`${book?.bookName} - ReadSphere`} />
+        <meta
+          property="og:description"
+          content={`Check out ${book?.bookName} by ${book?.authorName} on ReadSphere.`}
+        />
+      </Helmet>
+
       <div className="relative">
         {/* Book Details Card */}
+        <GoBack/>
         <div className="card md:card-side bg-base-100 shadow-xl max-w-screen-lg mx-auto my-8">
           <figure className="md:w-1/2 p-6 bg-purple-100">
             <img
@@ -159,7 +176,6 @@ const BookDetails = () => {
                 onClick={() =>
                   document.getElementById("my_modal_5").showModal()
                 }
-                // disabled={book.quantity === 0 || user?.email === book?.publisherEmail}
               >
                 {book.quantity > 0 ? "Borrow Now" : "Book Unavailable"}
               </button>
