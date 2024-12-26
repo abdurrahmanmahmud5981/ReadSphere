@@ -19,7 +19,7 @@ const useAxiosSecure = () => {
         return res;
       },
       async (error) => {
-        console.log(
+        console.error(
           "error caught from our very own axios interceptor-->",
           error.response
         );
