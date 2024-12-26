@@ -7,8 +7,8 @@ import useAuth from "../../hooks/useAuth";
 import { Helmet } from "react-helmet";
 
 const AddBook = () => {
-  const axiosSecure = useAxiosSecure();
   const { user } = useAuth();
+  const axiosSecure = useAxiosSecure();
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 

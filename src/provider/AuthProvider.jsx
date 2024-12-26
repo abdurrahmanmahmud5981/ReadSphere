@@ -13,11 +13,10 @@ import {
 } from "firebase/auth";
 import auth from "../firebase/firebase.config";
 import LoadingSpinner from "../components/LoadingSpinner";
-import useAxiosSecure from "../hooks/useAxiosSecure";
+import axios from "axios";
 
 // eslint-disable-next-line react/prop-types
 const AuthProvider = ({ children }) => {
-  const axiosSecure = useAxiosSecure();
   const googleProvider = new GoogleAuthProvider();
   const [user, setUser] = useState(null);
   const [loader, setLoader] = useState(true);
@@ -53,11 +52,19 @@ const AuthProvider = ({ children }) => {
       setUser(currentUser);
       setLoader(false);
       if (currentUser?.email) {
-        await axiosSecure.post(`/jwt`, {
-          email: currentUser?.email,
-        });
+        await axios.post(
+          `https://b10a11-server-side-abdurrahmanmahmud5981.vercel.app/jwt`,
+          {
+            email: currentUser?.email,
+          },
+          { withCredentials: true }
+        );
       } else {
-        await axiosSecure.get(`/logout`);
+        await axios.get(
+          `https://b10a11-server-side-abdurrahmanmahmud5981.vercel.app/logout`,
+          {},
+          { withCredentials: true }
+        );
       }
       return () => {
         unsubscribe();

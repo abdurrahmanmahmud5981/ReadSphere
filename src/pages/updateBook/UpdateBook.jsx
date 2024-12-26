@@ -9,9 +9,9 @@ import useAuth from "../../hooks/useAuth";
 import { Helmet } from "react-helmet";
 
 const UpdateBook = () => {
-  const axiosSecure = useAxiosSecure()
   const { user } = useAuth();
   const [loading, setLoading] = useState(false);
+  const axiosSecure = useAxiosSecure()
 
   const navigate = useNavigate();
   const { id } = useParams();
@@ -56,7 +56,7 @@ const UpdateBook = () => {
       }
     };
     fetchCategory();
-  }, [id,setValue]);
+  }, [id,setValue,axiosSecure]);
 
  
   const onSubmit = async (data) => {
