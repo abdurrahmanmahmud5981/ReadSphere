@@ -60,7 +60,7 @@ const AuthProvider = ({ children }) => {
           { withCredentials: true }
         );
       } else {
-        await axios.get(
+        await axios.post(
           `https://b10a11-server-side-abdurrahmanmahmud5981.vercel.app/logout`,
           {},
           { withCredentials: true }
