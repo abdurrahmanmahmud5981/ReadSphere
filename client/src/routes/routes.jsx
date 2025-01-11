@@ -11,6 +11,7 @@ import BookDetails from "../pages/bookDetails/BookDetails";
 import UpdateBook from "../pages/updateBook/UpdateBook";
 import PrivateRoute from "./PrivetRoutes";
 import NotFound from "../pages/notFound/NotFound";
+import AboutUs from "../pages/aboutUs/AboutUs";
 
 const routes = createBrowserRouter([
   {
@@ -33,6 +34,10 @@ const routes = createBrowserRouter([
       {
         path: "allBooks",
         element: <AllBooks />,
+      },
+      {
+        path: "aboutUs",
+        element: <AboutUs />,
       },
       {
         path: "updateBook/:id",

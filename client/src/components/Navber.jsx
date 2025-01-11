@@ -13,11 +13,18 @@ const Navber = () => {
       <li>
         <NavLink to="/allBooks">All Books</NavLink>
       </li>
+      {user?.email && (
+        <>
+          <li>
+            <NavLink to="/addBook">Add Book</NavLink>
+          </li>
+          <li>
+            <NavLink to="/borrowedBooks">Borrowed Books</NavLink>
+          </li>
+        </>
+      )}
       <li>
-        <NavLink to="/addBook">Add Book</NavLink>
-      </li>
-      <li>
-        <NavLink to="/borrowedBooks">Borrowed Books</NavLink>
+        <NavLink to="/aboutUs">About Us</NavLink>
       </li>
     </>
   );
@@ -69,7 +76,6 @@ const Navber = () => {
         </div>
         <div className="navbar-end">
           {user ? (
-            
             <div className="dropdown dropdown-hover dropdown-end z-50 ring ring-primary rounded-full">
               <div tabIndex={0} role="button" className="">
                 {user?.photoURL && (
