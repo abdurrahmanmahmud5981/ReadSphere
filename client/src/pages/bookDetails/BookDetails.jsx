@@ -8,6 +8,7 @@ import Swal from "sweetalert2";
 import { Helmet } from "react-helmet";
 import LoadingSpinner from "../../components/LoadingSpinner";
 import GoBack from "../../components/GoBack";
+import axios from "axios";
 
 const BookDetails = () => {
   const axiosSecure = useAxiosSecure();
@@ -62,7 +63,7 @@ const BookDetails = () => {
         borrowDate: data.borrowDate,
         returnDate: data.returnDate,
       };
-      await axiosSecure.post(`/books/borrow`, borrowedBook);
+      await axios.post(`https://b10a11-server-side-abdurrahmanmahmud5981.vercel.app/books/borrow`, borrowedBook,{withCredentials:true});
       navigate("/borrowedBooks");
       Swal.fire({
         position: "center",
