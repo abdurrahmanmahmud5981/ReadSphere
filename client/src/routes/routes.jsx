@@ -15,7 +15,7 @@ import NotFound from "../pages/notFound/NotFound";
 const routes = createBrowserRouter([
   {
     path: "/",
-    errorElement: <NotFound/>,
+    errorElement: <NotFound />,
     element: <MainLayout />,
     children: [
       {
@@ -28,19 +28,11 @@ const routes = createBrowserRouter([
       },
       {
         path: "bookDetails/:id",
-        element: (
-         
-            <BookDetails />
-          
-        ),
+        element: <BookDetails />,
       },
       {
         path: "allBooks",
-        element: (
-          <PrivateRoute>
-            <AllBooks />
-          </PrivateRoute>
-        ),
+        element: <AllBooks />,
       },
       {
         path: "updateBook/:id",
