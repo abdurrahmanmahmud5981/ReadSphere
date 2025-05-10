@@ -3,6 +3,7 @@ import { NavLink } from "react-router-dom";
 import AuthContext from "../provider/AuthContext";
 import toast from "react-hot-toast";
 import logo from "../assets/logo.gif";
+import ThemeToggle from "./ThemeToggle";
 const Navber = () => {
   const { user, logOut } = useContext(AuthContext);
   const links = (
@@ -130,6 +131,7 @@ const Navber = () => {
               >
                 Register
               </NavLink>
+              <ThemeToggle />
             </div>
           )}
         </div>

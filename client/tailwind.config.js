@@ -8,7 +8,7 @@ export default {
   ],
   theme: {
     extend: {
-      colors:{
+      colors: {
         primary: '#8B5DFF',
         secondary: '#4dc049',
         danger: '#e74c3c',
@@ -21,4 +21,7 @@ export default {
     },
   },
   plugins: [daisyui],
+  daisyui: {
+    themes: ['light', 'dark'],
+  },
 }
