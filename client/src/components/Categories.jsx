@@ -32,11 +32,11 @@ const Categories = () => {
   return (
     <section className="mx-auto py-16">
       <h2 className="text-3xl font-bold text-center mb-12">Book Categories</h2>
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2  xl:grid-cols-4 gap-6">
         {categories.map(({ title, image, description }) => (
           <div
             key={title}
-            className="card rounded-xl bg-gradient-to-br from-purple-200/60 via-white/30 to-purple-400/40 shadow-xl hover:shadow-2xl transition-shadow"
+            className="card rounded-xl shadow hover:shadow-xl transition-shadow"
           >
             <figure>
               <img
@@ -47,7 +47,7 @@ const Categories = () => {
             </figure>
             <div className="card-body p-4">
               <h3 className="card-title text-lg font-semibold">{title}</h3>
-              <p className="text-sm text-gray-700">{description}</p>
+              <p className="text-sm ">{description}</p>
               <div className="card-actions mt-2">
                 <Link className="w-full" to={`/categories/${title}`}>
                   <button className="btn btn-neutral w-full rounded-full">
