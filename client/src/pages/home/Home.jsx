@@ -134,7 +134,7 @@ const Home = () => {
                 className={`px-6 py-3 mx-2 rounded-full transition-all duration-300 ${
                   activeTab === tab
                     ? "bg-primary text-white shadow-lg"
-                    : "bg-light text-info hover:bg-primary/10"
+                    : "bg-base-200  hover:bg-primary/10"
                 }`}
               >
                 {tab.charAt(0).toUpperCase() + tab.slice(1)}
@@ -148,13 +148,13 @@ const Home = () => {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -20 }}
               transition={{ duration: 0.3 }}
-              className="max-w-3xl mx-auto text-center flex flex-col justify-center items-center border p-4 rounded-xl bg-white"
+              className="max-w-3xl mx-auto text-center flex flex-col justify-center items-center border p-4 rounded-xl"
             >
               <div className="mb-6 ">{tabContent[activeTab].icon}</div>
-              <h2 className="text-3xl font-bold mb-6 text-info">
+              <h2 className="text-3xl font-bold mb-6 ">
                 {tabContent[activeTab].title}
               </h2>
-              <p className="text-xl text-info/80">
+              <p className="text-xl text-base-content/70">
                 {tabContent[activeTab].content}
               </p>
             </motion.div>
@@ -198,12 +198,12 @@ const Home = () => {
                 variants={fadeInUp}
                 whileHover={{ scale: 1.05 }}
                 href={item.href}
-                className="flex flex-col items-center p-6 bg-white rounded-xl shadow-lg hover:shadow-xl transition-all cursor-pointer"
+                className="flex flex-col items-center p-6  rounded-xl border shadow hover:shadow-xl transition-all cursor-pointer"
               >
                 <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mb-4">
                   <span className="text-primary">{item.icon}</span>
                 </div>
-                <span className="text-gray-600">{item.content}</span>
+                <span className="">{item.content}</span>
               </motion.a>
             ))}
           </div>
