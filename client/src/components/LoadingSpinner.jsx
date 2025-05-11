@@ -1,6 +1,6 @@
 const LoadingSpinner = () => {
     return (
-      <div className='flex items-center justify-center w-full min-h-screen backdrop-blur-2xl  bg-gradient-to-r from-white/60 via-purple-200/80 to-white/60 '>
+      <div className='flex items-center justify-center w-full min-h-screen backdrop-blur-2xl   '>
         <div
           aria-label='Loading...'
           role='status'

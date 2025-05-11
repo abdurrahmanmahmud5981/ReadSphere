@@ -111,7 +111,7 @@ const Home = () => {
             <motion.div
               key={index}
               variants={fadeInUp}
-              className="text-center bg-base-100 p-3 rounded-xl border"
+              className="text-center bg-base-100 p-3 rounded-xl border border-neutral-content/50"
             >
               <div className="bg-primary/10 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6">
                 {value.icon}
@@ -148,7 +148,7 @@ const Home = () => {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -20 }}
               transition={{ duration: 0.3 }}
-              className="max-w-3xl mx-auto text-center flex flex-col justify-center items-center border p-4 rounded-xl"
+              className="max-w-3xl mx-auto text-center flex flex-col justify-center items-center shadow border border-neutral-content/50 p-4 rounded-xl"
             >
               <div className="mb-6 ">{tabContent[activeTab].icon}</div>
               <h2 className="text-3xl font-bold mb-6 ">
@@ -198,7 +198,7 @@ const Home = () => {
                 variants={fadeInUp}
                 whileHover={{ scale: 1.05 }}
                 href={item.href}
-                className="flex flex-col items-center p-6  rounded-xl border shadow hover:shadow-xl transition-all cursor-pointer"
+                className="flex flex-col items-center p-6  rounded-xl border border-neutral-content/50 shadow hover:shadow-xl transition-all cursor-pointer"
               >
                 <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mb-4">
                   <span className="text-primary">{item.icon}</span>

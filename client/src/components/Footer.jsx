@@ -3,7 +3,7 @@ import { FaFacebook, FaTwitter, FaInstagram, FaLinkedin } from "react-icons/fa";
 
 const Footer = () => {
   return (
-    <footer className="border-t border-neutral-content  bg-gradient-to-br from-purple-200/60 via-white/30 to-purple-400/40 py-10">
+    <footer className="border-t border-neutral-content/50   py-10">
       <div className="max-w-screen-2xl  w-11/12 mx-auto  grid grid-cols-1 md:grid-cols-3 gap-6">
         {/* Logo and Description */}
         <div>
@@ -79,7 +79,7 @@ const Footer = () => {
         </div>
       </div>
       {/* Footer Bottom */}
-      <div className="text-center mt-10 border-t border-neutral-content pt-5">
+      <div className="text-center mt-10 border-t border-neutral-content/50 pt-5">
         <p className="text-sm">
           © {new Date().getFullYear()} ReadSphere. All Rights Reserved.
         </p>

@@ -29,7 +29,7 @@ const Features = () => {
           {features?.map((item, index) => (
             <div
               key={index}
-              className="card   border shadow-lg hover:shadow-2xl transition duration-300 rounded-xl"
+              className="card   border border-neutral-content/15 shadow-lg hover:shadow-2xl transition duration-300 rounded-xl"
             >
               <div className="card-body items-center text-center space-y-4">
                 <div className="rounded-full bg-primary p-5 shadow-lg">
