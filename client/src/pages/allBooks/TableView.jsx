@@ -14,7 +14,7 @@ const TableView = ({ containerVariants, itemVariants, filteredBooks }) => {
       animate="visible"
     >
       <table className="table table-zebra w-full">
-        <thead className="bg-base-200 text-black rounded-t-3xl border-2 ">
+        <thead className="bg-base-200 rounded-t-3xl border-2 ">
           <tr>
             <th>Image</th>
             <th>Name</th>
