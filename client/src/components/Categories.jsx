@@ -36,7 +36,7 @@ const Categories = () => {
         {categories.map(({ title, image, description }) => (
           <div
             key={title}
-            className="card rounded-xl shadow hover:shadow-xl transition-shadow"
+            className="card border rounded-xl shadow hover:shadow-xl transition-shadow"
           >
             <figure>
               <img
