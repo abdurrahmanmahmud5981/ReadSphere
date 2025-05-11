@@ -77,7 +77,7 @@ const AddBook = () => {
           content="Add new book to the ReadSphere."
         />
       </Helmet>
-      <div className="max-w-2xl mx-auto bg-white rounded-xl  p-8 bg-gradient-to-br from-purple-200/60 via-white/30 to-purple-400/40 shadow-xl hover:shadow-2xl transition-shadow">
+      <div className="max-w-2xl mx-auto  rounded-xl  p-8 shadow border border-neutral-content/30 hover:shadow-2xl transition-shadow">
         <h1 className="text-3xl font-bold text-center mb-8 ">Add New Book</h1>
 
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
