@@ -69,10 +69,10 @@ const AboutUs = () => {
       >
         <div className="container mx-auto px-4 relative z-10">
           <motion.div {...fadeInUp} className="text-center max-w-4xl mx-auto">
-            <h1 className="text-6xl md:text-7xl font-bold mb-6 text-primary">
+            <h1 className="text-3xl md:text-6xl font-bold mb-6 text-primary">
               Transforming Visa Processing
             </h1>
-            <p className="text-2xl md:text-3xl text-gray-600 mb-8">
+            <p className="text-xl md:text-3xl  mb-8">
               Where Innovation Meets Excellence in Travel Documentation
             </p>
           </motion.div>
@@ -91,14 +91,14 @@ const AboutUs = () => {
             <motion.div
               key={index}
               whileHover={{ scale: 1.05 }}
-              className="text-center p-6 rounded-xl bg-white border border-primary/20 hover:border-primary shadow-lg hover:shadow-xl transition-all duration-300"
+              className="text-center p-6 rounded-xl  border border-primary/20 hover:border-primary shadow-lg hover:shadow-xl transition-all duration-300"
             >
               <div className="mb-4">
                 <span className="text-2xl font-bold text-primary">
                   {stat.value}
                 </span>
               </div>
-              <p className="text-gray-600">{stat.label}</p>
+              <p className="">{stat.label}</p>
             </motion.div>
           ))}
         </div>
@@ -122,9 +122,7 @@ const AboutUs = () => {
             <motion.div
               key={index}
               whileHover={{ scale: 1.03 }}
-              className={`bg-white rounded-xl p-8 shadow-xl hover:shadow-2xl transition-all duration-300 
-                   "border border-primary/20"
-              }`}
+              className='rounded-xl p-8 shadow hover:shadow-2xl transition-all duration-300 border border-neutral-content/20 bg-base-100'
             >
               <motion.div transition={{ duration: 0.5 }} className="mb-6">
                 {feature.icon}
@@ -132,7 +130,7 @@ const AboutUs = () => {
               <h3 className="text-xl font-bold mb-4 text-primary">
                 {feature.title}
               </h3>
-              <p className="text-gray-600">{feature.description}</p>
+              <p className="">{feature.description}</p>
             </motion.div>
           ))}
         </div>
