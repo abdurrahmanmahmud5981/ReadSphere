@@ -1,17 +1,8 @@
-
 import { motion } from "framer-motion";
 import { Helmet } from "react-helmet";
-import {
-  FaPassport,
-  FaGlobe,
-
-  FaUserTie,
-
-} from "react-icons/fa";
+import { FaBook, FaUsers, FaGlobe } from "react-icons/fa";
 
 const AboutUs = () => {
-
-
   const fadeInUp = {
     initial: { opacity: 0, y: 80 },
     animate: { opacity: 1, y: 0 },
@@ -27,38 +18,37 @@ const AboutUs = () => {
   };
 
   const statistics = [
-    { value: "50K+", label: "Successful Applications" },
-    { value: "100+", label: "Countries Covered" },
-    { value: "98%", label: "Success Rate" },
-    { value: "24/7", label: "Support Available" },
+    { value: "10K+", label: "Books Available" },
+    { value: "5K+", label: "Active Members" },
+    { value: "100+", label: "Categories Covered" },
+    { value: "24/7", label: "Online Access" },
   ];
 
   const features = [
     {
-      icon: <FaPassport className="w-12 h-12 text-primary" />,
-      title: "Expert Visa Processing",
+      icon: <FaBook className="w-12 h-12 text-primary" />,
+      title: "Vast Book Collection",
       description:
-        "Streamlined application handling with real-time tracking and professional guidance.",
+        "Explore thousands of books across genres including history, science, literature, and more.",
     },
     {
       icon: <FaGlobe className="w-12 h-12 text-primary" />,
-      title: "Global Network",
+      title: "Online Library Access",
       description:
-        "Extensive partnerships with embassies and consulates worldwide.",
+        "Access and manage your borrowed books anytime, from any device.",
     },
     {
-      icon: <FaUserTie className="w-12 h-12 text-primary" />,
-      title: "Dedicated Support",
-      description: "Personal visa consultants available 24/7 to guide you.",
+      icon: <FaUsers className="w-12 h-12 text-primary" />,
+      title: "Community Driven",
+      description:
+        "A hub for readers, students, and educators to connect and learn.",
     },
   ];
 
   return (
-    <div className="min-h-screen ">
+    <div className="min-h-screen bg-base-100">
       <Helmet>
-        <title>
-          About Visa Navigator - Your Premium Visa Processing Partner
-        </title>
+        <title>About Us - ReadSphere Library</title>
       </Helmet>
 
       {/* Hero Section */}
@@ -70,10 +60,10 @@ const AboutUs = () => {
         <div className="container mx-auto px-4 relative z-10">
           <motion.div {...fadeInUp} className="text-center max-w-4xl mx-auto">
             <h1 className="text-3xl md:text-6xl font-bold mb-6 text-primary">
-              Transforming Visa Processing
+              Welcome to ReadSphere
             </h1>
-            <p className="text-xl md:text-3xl  mb-8">
-              Where Innovation Meets Excellence in Travel Documentation
+            <p className="text-xl md:text-2xl mb-8">
+              Empowering Knowledge Through Seamless Library Access
             </p>
           </motion.div>
         </div>
@@ -86,12 +76,12 @@ const AboutUs = () => {
         animate="animate"
         className="container mx-auto px-4 py-20"
       >
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
           {statistics.map((stat, index) => (
             <motion.div
               key={index}
               whileHover={{ scale: 1.05 }}
-              className="text-center p-6 rounded-xl  border border-primary/20 hover:border-primary shadow-lg hover:shadow-xl transition-all duration-300"
+              className="text-center p-6 rounded-xl border border-primary/20 hover:border-primary shadow-lg hover:shadow-xl transition-all duration-300"
             >
               <div className="mb-4">
                 <span className="text-2xl font-bold text-primary">
@@ -104,7 +94,7 @@ const AboutUs = () => {
         </div>
       </motion.div>
 
-      {/* Features */}
+      {/* Features Section */}
       <motion.div
         variants={staggerContainer}
         initial="initial"
@@ -115,14 +105,14 @@ const AboutUs = () => {
           variants={fadeInUp}
           className="text-4xl font-bold text-center mb-16 text-primary"
         >
-          Our Services
+          Why Choose ReadSphere?
         </motion.h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
           {features.map((feature, index) => (
             <motion.div
               key={index}
               whileHover={{ scale: 1.03 }}
-              className='rounded-xl p-8 shadow hover:shadow-2xl transition-all duration-300 border border-neutral-content/20 bg-base-100'
+              className="rounded-xl p-8 shadow hover:shadow-2xl transition-all duration-300 border border-neutral-content/20 bg-base-100"
             >
               <motion.div transition={{ duration: 0.5 }} className="mb-6">
                 {feature.icon}
